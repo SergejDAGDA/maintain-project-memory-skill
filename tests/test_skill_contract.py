@@ -169,7 +169,25 @@ class SkillContractTests(unittest.TestCase):
         self.assertIn("references/local-git-checkpoints.md", skill)
         self.assertIn("references/local-git-checkpoints.md", lifecycle)
         self.assertIn("independent", policy)
-        self.assertEqual("0.1.7", self.read("VERSION").strip())
+        self.assertEqual("0.1.8", self.read("VERSION").strip())
+
+    def test_local_git_checkpoint_requires_commit_stable_current_status(self) -> None:
+        """Regression contract for stale 'checkpoint ready' STATUS after commit."""
+        guide = self.read("references/local-git-checkpoints.md")
+        lifecycle = self.read("references/lifecycle-protocol.md")
+        agents = self.read("assets/templates/AGENTS.memory.fragment.md")
+        skill = self.read("SKILL.md")
+        for content in (guide, lifecycle, agents, skill):
+            self.assertIn("commit-stable", content)
+            self.assertIn("commit ready", content)
+        self.assertIn("reject before staging", guide.lower())
+        self.assertIn("In progress: MVP checkpoint ready for Git commit", guide)
+        self.assertIn("pre-commit HEAD", guide)
+        self.assertIn("next\napplicable project action (or `None`)", guide)
+        self.assertIn("extra memory-only", guide)
+        self.assertIn("final SHA after the single commit", agents)
+        self.assertIn("a transient `commit ready` state", lifecycle)
+        self.assertIn("without a recursive memory-only commit", skill)
 
     def test_minimum_wip_continuity_boundaries_and_no_new_operation(self) -> None:
         lifecycle = self.read("references/lifecycle-protocol.md")

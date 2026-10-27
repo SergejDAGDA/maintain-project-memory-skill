@@ -19,7 +19,15 @@ substantial verified project change, the Checkpoint lifecycle also coordinates a
 **local Git checkpoint** under the separate `Local Git commit policy` in
 `AGENTS.md`. The actual commit uses native Git and is not a fifth memory
 operation or permission to publish remotely. Read
-`references/local-git-checkpoints.md` before any automatic local commit. When starting or resuming substantial work, read `references/lifecycle-protocol.md` and perform the bounded preflight before relying on project memory. Use `scripts/memory_snapshot.py <project-root>` when a deterministic memory/VCS fingerprint materially helps startup or pre-write revalidation.
+`references/local-git-checkpoints.md` before any automatic local commit.
+Before staging a completed stage, require a **commit-stable STATUS closeout**:
+replace transient `commit ready` WIP with the verified current outcome; do not
+commit an intermediate status that would become false immediately after Git
+commit. Verify and report the final SHA without a recursive memory-only commit.
+When starting or resuming substantial work, read `references/lifecycle-protocol.md`
+and perform the bounded preflight before relying on project memory. Use
+`scripts/memory_snapshot.py <project-root>` when a deterministic memory/VCS
+fingerprint materially helps startup or pre-write revalidation.
 
 Use `scripts/init_project_memory.py <project-root>` to copy missing templates. It does not overwrite existing files unless `--overwrite` is explicitly passed.
 

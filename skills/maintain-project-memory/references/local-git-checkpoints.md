@@ -54,6 +54,35 @@ strict-mode memory diff, or an intermediate/unfinished operation. No-op if
 there is no task-owned diff. A user-requested standalone checkpoint can
 remain uncommitted when no safe Git boundary exists.
 
+## Commit-stable STATUS closeout (before staging)
+
+Before staging a verified completed stage, reconcile `STATUS.md` into a **commit-stable**
+current snapshot: it must remain factually accurate if the planned local commit succeeds
+without any later memory edit. Replace the unfinished Minimum WIP Continuity record
+with the verified stage outcome, actual checks, remaining blockers, and the next
+applicable project action (or `None`). This is the existing bounded semantic Checkpoint review, not a
+new operation or mandatory validator.
+
+Reject the final staged `STATUS.md` if its **current** outcome, in-progress state,
+blockers, or next safe step still presents this already-completed stage as
+`Git checkpoint: ready`, `commit ready`, `ready to commit`, `commit pending`, or `next: commit`.
+Those are transient Git workflow notes, not durable project status. A historical
+or explicitly scoped unfinished commit in a genuinely incomplete task is different:
+preserve truthful WIP, but do not commit under this completed-stage procedure.
+
+For example, **reject before staging** a current snapshot that says:
+`In progress: MVP checkpoint ready for Git commit; Next safe step: git commit`.
+Instead record the completed MVP, verified tests, remaining project work, and
+`Repository evidence: <SHA> (pre-commit HEAD)` if the previous SHA matters.
+Do not call the pre-commit SHA the post-commit revision. Record factual verification
+in `SESSION_LOG.md` without claiming that a not-yet-run Git commit succeeded.
+
+After a successful commit, verify and report the new HEAD and clean/dirty state
+outside the just-committed memory snapshot; do **not** make an extra memory-only
+commit merely to insert that SHA. If the commit fails, report the failure and
+actual Git state instead of pretending that the commit-stable snapshot proves
+Git completion. Do not make a second commit to conceal a stale staged snapshot.
+
 ## Native Git safety procedure
 
 1. Resolve `git rev-parse --show-toplevel` and verify it is the intended
