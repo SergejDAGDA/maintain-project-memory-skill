@@ -121,10 +121,13 @@ requires separate authorization. No `push`, tag, PR, release, or deployment
 is implied by a local commit.
 
 The exact safe native Git workflow, staging guards and revision semantics
-are in `references/local-git-checkpoints.md`. This does not promise
-automatic invocation in sessions that ignore the repository's `AGENTS.md`.
+are in `references/local-git-checkpoints.md`. Before staging a completed stage,
+`STATUS.md` must describe the verified outcome, not a transient `commit ready`
+state; the resulting SHA is verified after the single commit, without a
+recursive memory-only commit. This does not promise automatic invocation in
+sessions that ignore the repository's `AGENTS.md`.
 
-**Installable skill version: 0.1.7.** The installed
+**Installable skill version: 0.1.8.** The installed
 `skills/maintain-project-memory/VERSION` marker is independent of the
 project-memory protocol/schema markers.
 
