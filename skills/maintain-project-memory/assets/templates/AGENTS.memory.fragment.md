@@ -59,6 +59,11 @@ After a meaningful verified stage:
 - before declaring `Checkpoint: COMPLETE`, reconcile task-relevant current claims across `PROJECT.md`, `STATUS.md`, `DECISIONS.md`, `SESSION_LOG.md` and any active `HANDOFF.md`: no obsolete pre-task stage presented as current, historical RED checks labelled as pre-change, and no assumed approval from code/tests; keep `SESSION_LOG.md` append-only and earlier dated entries historical. If a required factual correction is blocked, report `Checkpoint: PENDING` with the conflict, even if structural audit passes. Do not force edits to files with no stale current claims;
 - report every memory file changed;
 - when this verified stage changed project files and the declared Local Git commit policy permits it, synchronize affected product docs (use `project-documentation` if installed and relevant; otherwise update the maintained docs directly) and memory first, then make one narrowly scoped **local-only** Git commit via native Git. Never stage unrelated changes. See the installed `maintain-project-memory` skill's `references/local-git-checkpoints.md`.
+  Before staging, leave a **commit-stable STATUS snapshot**: replace transient
+  `commit ready` / `next: commit` WIP wording with the verified completed
+  result and next applicable project action. Label any recorded pre-commit HEAD explicitly;
+  verify and report the final SHA after the single commit without a follow-up
+  memory-only commit.
 
 When this project has an approved **separate deployment** workflow:
 - on "prepare for deployment", use the installed documentation/release workflow as appropriate, then a memory Handoff to freeze the approved source revision/build, preserve explicit data-protection gates, and give a bounded deployment prompt; do not mark the release as deployed;

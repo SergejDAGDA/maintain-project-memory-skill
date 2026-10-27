@@ -242,6 +242,12 @@ Do not create a Checkpoint for trivial formatting, ordinary reading, a transient
 Before claiming the canonical Checkpoint is complete, compare **task-relevant current-state assertions** in `STATUS.md` with the stable scope/stage and source map in `PROJECT.md`, the approval provenance in `DECISIONS.md`, any active `HANDOFF.md`, and the latest historical entry in `SESSION_LOG.md`. This is a bounded consistency review, **not** a full repository audit or a new validator.
 
 A pre-task stage, an assertion that no Checkpoint exists, or an old failing test must not remain presented as current after a verified completion. Preserve dated earlier log entries as historical evidence and keep `SESSION_LOG.md` append-only; a historical “none yet” statement is not itself a live contradiction. Label RED/pre-fix checks as historical, and describe current verification separately. Code, tests and descriptive documentation do not establish approval provenance. Reconcile only verified factual drift permitted by the active update policy, and preserve unrelated user edits. If a task-relevant contradiction cannot be resolved within authorized scope, report `Checkpoint: PENDING` with the exact inconsistency rather than silently claiming synchronized memory. A structural audit PASS cannot substitute for this semantic review.
+For a completed stage with an authorized local Git checkpoint, also apply the
+**commit-stable STATUS closeout** in `references/local-git-checkpoints.md`
+before staging: the current snapshot must describe the verified outcome rather
+than a transient `commit ready` state. A pre-commit HEAD may be recorded only
+as a labelled pre-commit identity; final HEAD is verified and reported after
+the single commit, not recursively committed into `STATUS.md`.
 
 ## Pre-write optimistic revalidation
 
